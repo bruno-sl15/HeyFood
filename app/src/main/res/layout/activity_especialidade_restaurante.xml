@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.heyfood.heyfoodapp.restaurante.ui.CadastrarRestauranteActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar5"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@android:color/background_light"
+            android:backgroundTint="@color/colorAccent"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cadastro Restaurante"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar5" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="@color/corBotaoLogin"
+            android:hint="PRÓXIMO"
+            android:onClick="finalizarCadastroRestaurante"
+            android:text="Finalizar Cadastro"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="Definir Especialidades:"
+            android:textColor="?attr/actionModeSplitBackground"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <Switch
+            android:id="@+id/restauranteBrasileiraId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Brasileira"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteAcaiId" />
+
+        <Switch
+            android:id="@+id/restauranteSaudavelId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Saudável"
+            app:layout_constraintEnd_toEndOf="@+id/barrier"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantePizzaId" />
+
+        <Switch
+            android:id="@+id/restauranteMarmitaId"
+            android:layout_width="130dp"
+            android:layout_height="28dp"
+            android:text="Marmita"
+            app:layout_constraintEnd_toEndOf="@+id/barrier"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteLanchesId" />
+
+        <Switch
+            android:id="@+id/restauranteLanchesId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Lanches"
+            app:layout_constraintEnd_toEndOf="@+id/barrier"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteJaponesaId" />
+
+        <Switch
+            android:id="@+id/restauranteChinesaId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Chinesa"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteCarnesId" />
+
+        <Switch
+            android:id="@+id/restauranteCarnesId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Carnes"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteBrasileiraId" />
+
+        <Switch
+            android:id="@+id/restauranteItalianaId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Italiana"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteConteporanea" />
+
+        <Switch
+            android:id="@+id/restauranteConteporanea"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Conteporânea"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteChinesaId" />
+
+        <Switch
+            android:id="@+id/restaurantePizzaId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Pizza"
+            app:layout_constraintEnd_toEndOf="@+id/barrier"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteMarmitaId" />
+
+        <Switch
+            android:id="@+id/restauranteJaponesaId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Japonesa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Switch
+            android:id="@+id/restauranteAcaiId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Açaí"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="Serviços:"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteItalianaId" />
+
+        <Switch
+            android:id="@+id/restauranteAlacarteId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Á la carte"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <Switch
+            android:id="@+id/restauranteRodizioId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Rodízio"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteAlacarteId" />
+
+        <Switch
+            android:id="@+id/restauranteSelfserviceId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Self-service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <Switch
+            android:id="@+id/restauranteDeliveryId"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Delivery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/restauranteSelfserviceId" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

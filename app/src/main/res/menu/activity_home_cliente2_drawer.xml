@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/perfilId"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/categoriaId"
+            android:icon="@android:drawable/ic_input_add"
+            android:title="Categoria" />
+        <item
+            android:id="@+id/listarRestauranteId"
+            android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+            android:title="Listar Restaurantes" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/sairId"
+                android:icon="@drawable/ic_sair_preto_24dp"
+                android:title="Sair" />
+        </menu>
+    </item>
+
+</menu>

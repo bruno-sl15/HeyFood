@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#bebec1</color>
+    <color name="colorPrimaryDark">#7e7e83</color>
+    <color name="colorAccent">#ec1230</color>
+    <color name="corBotaoLogin">#ec1230</color>
+    <color name="corBotaoCadastrar">#96a5ae</color>
+    <color name="corBarraSuperior">#ec1230</color>
+
+</resources>

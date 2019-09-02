@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.heyfood.heyfoodapp">
+
+    <application
+        android:name=".infra.ui.HeyFoodApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".usuario.ui.TrocarSenhaActivity" />
+        <activity android:name=".contato.ui.AtualizarContatoActivity" />
+        <activity android:name=".endereco.ui.AtualizarEnderecoActivity" />
+        <activity android:name=".restaurante.ui.ListarRestaurantes" />
+        <activity android:name=".proprietario.ui.PerfilProprietarioActivity" />
+        <activity android:name=".cliente.ui.PerfilClienteActivity" />
+        <activity android:name=".proprietario.ui.CadastrarProprietarioActivity" />
+        <activity
+            android:name=".usuario.ui.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".cliente.ui.CadastrarClienteActivity" />
+        <activity android:name=".restaurante.ui.CadastrarRestauranteActivity" />
+        <activity android:name=".restaurante.ui.EspecialidadeRestauranteActivity" />
+        <activity android:name=".restaurante.ui.InformacoesRestauranteActivity" />
+        <activity android:name=".cliente.ui.HomeClienteActivity" />
+        <activity android:name=".proprietario.ui.HomeProprietarioActivity" />
+        <activity android:name=".cliente.ui.PreferenciaClienteActivity" />
+        <activity android:name=".restaurante.ui.ContatoRestauranteActivity" />
+        <activity android:name=".restaurante.ui.AtualizarRestauranteActivity" />
+        <activity android:name=".prato.ui.CadastrarPratoActivity" />
+        <activity android:name=".prato.ui.ListarPratosActivity"></activity>
+    </application>
+
+</manifest>
