@@ -16,6 +16,10 @@
             android:id="@+id/listarRestauranteId"
             android:icon="@drawable/ic_format_list_bulleted_black_24dp"
             android:title="Listar Restaurantes" />
+        <item
+            android:id="@+id/recomendacoesId"
+            android:icon="@drawable/ic_recomentation_black_24dp"
+            android:title="Recomendações" />
     </group>
 
     <item android:title="">

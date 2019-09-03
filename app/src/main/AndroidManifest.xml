@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".cliente.ui.RecomendacoesActivity"></activity>
         <activity android:name=".usuario.ui.TrocarSenhaActivity" />
         <activity android:name=".contato.ui.AtualizarContatoActivity" />
         <activity android:name=".endereco.ui.AtualizarEnderecoActivity" />
@@ -36,7 +37,7 @@
         <activity android:name=".restaurante.ui.ContatoRestauranteActivity" />
         <activity android:name=".restaurante.ui.AtualizarRestauranteActivity" />
         <activity android:name=".prato.ui.CadastrarPratoActivity" />
-        <activity android:name=".prato.ui.ListarPratosActivity"></activity>
+        <activity android:name=".prato.ui.ListarPratosActivity" />
     </application>
 
 </manifest>
