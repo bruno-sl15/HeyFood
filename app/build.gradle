@@ -31,4 +31,5 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.0.0'
     testImplementation 'com.google.truth:truth:0.43'
+    implementation 'com.amitshekhar.android:android-networking:1.0.0'
 }

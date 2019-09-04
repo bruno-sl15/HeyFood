@@ -3,6 +3,7 @@ package com.heyfood.heyfoodapp.cliente.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,15 +18,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.heyfood.heyfoodapp.R;
 import com.heyfood.heyfoodapp.avaliacao.dominio.AvaliacaoRestaurante;
 import com.heyfood.heyfoodapp.avaliacao.persistencia.AvaliacaoRestauranteDAO;
+import com.heyfood.heyfoodapp.chatbot.ChatArrayAdapter;
+import com.heyfood.heyfoodapp.chatbot.ChatMessage;
 import com.heyfood.heyfoodapp.cliente.dominio.Cliente;
 import com.heyfood.heyfoodapp.cliente.negocio.ClienteServices;
 import com.heyfood.heyfoodapp.infra.Sessao;
@@ -39,17 +51,25 @@ import com.heyfood.heyfoodapp.restaurante.ui.ListarRestaurantes;
 import com.heyfood.heyfoodapp.usuario.ui.LoginActivity;
 import com.heyfood.heyfoodapp.util.RecyclerItemClickListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView nome;
     TextView nomeMenu;
     TextView emailMenu;
     Cliente cliente;
     public static Context contexto;
+    private ListView listView;
+    private EditText chatText;
+    private ImageButton send;
+    private JSONObject conversationContext;
+    private ChatArrayAdapter chatArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +77,21 @@ public class HomeClienteActivity extends AppCompatActivity
         setContentView(R.layout.activity_home_cliente);
         contexto = this;
         cliente = Sessao.instance.getCliente();
+        chatText = findViewById(R.id.editText);
+        send = findViewById(R.id.send);
+        configureListView();
+        getResponse();
 
-        //Bem vindo 'nome do usuario'
-        nome = findViewById(R.id.textBoasVindasClienteId);
-        nome.setText(String.format("Bem vindo, %s!", cliente.getUsuario().getPessoa().getNome()));
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String input = chatText.getText().toString();
+                // print on the outputTextView what the user types
+                chatArrayAdapter.add(new ChatMessage(true, input));
+                getResponse();
+                chatText.setText("");
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -146,5 +177,86 @@ public class HomeClienteActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void configureListView(){
+        chatArrayAdapter = new ChatArrayAdapter(getApplicationContext(), R.layout.my_message);
+        listView = findViewById(R.id.messages_view);
+        listView.setAdapter(chatArrayAdapter);
+        listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        //to scroll the list view to bottom on data change
+        chatArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                listView.setSelection(chatArrayAdapter.getCount() - 1);
+            }
+        });
+    }
+
+    private void getResponse() {
+        String workspaceId = "a7436f08-a414-41ab-9906-fa9e6324be46";
+        String urlAssistant = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/" +
+                workspaceId +
+                "/message?version=2019-02-28";
+        String authentication = "YXBpa2V5OlNqOWdOeHdNOF9CS2Naamd1eW1jOE5DeUxseVpUSXU2YmlzdzdteUM4Ukh3";
+        AndroidNetworking.post(urlAssistant)
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("Authorization", "Basic " + authentication)
+                .addJSONObjectBody(createJsonObjectBody())
+                .setPriority(Priority.HIGH)
+                .setTag(R.string.app_name)
+                .build()
+                .getAsJSONObject(getOutputMessage());
+    }
+
+    private JSONObject createJsonObjectBody(){
+        JSONObject inputJsonObject = new JSONObject();
+        JSONObject jsonBody = new JSONObject();
+        try {
+            inputJsonObject.put("text", chatText.getText().toString());
+            // put the text Json in the main JSONObject
+            jsonBody.put("input", inputJsonObject);
+            // put the conversation context Json in the main JSONObject
+            jsonBody.put("context", conversationContext);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonBody;
+    }
+
+    private JSONObjectRequestListener getOutputMessage(){
+        return new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONArray outputJsonObject;
+                try {
+                    // Get the response text from Watson
+                    outputJsonObject = response.getJSONObject("output").getJSONArray("text");
+                    // Refresh the conversation context
+                    conversationContext = response.getJSONObject("context");
+                    /* Sometimes Watson can return more then one string
+                     *  These strings are in a JSONArray that is iterated by the for bellow
+                     */
+                    for(int index=0; index<outputJsonObject.length(); index++){
+                        // Print the messages in the outputTextView
+                        String mensagem = outputJsonObject.get(index).toString();
+                        if (mensagem.substring(0,4).equals("Vou ") || mensagem.substring(0,4).equals("Irei") || mensagem.substring(0,4).equals("I wi")){
+                            Intent novaTela = new Intent(contexto, RecomendacoesActivity.class);
+                            startActivity(novaTela);
+                        }
+                        chatArrayAdapter.add(new ChatMessage(false, outputJsonObject.get(index).toString()));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onError(ANError anError) {
+                // Shows a message of error in the case of the connection fails
+                Toast.makeText(getApplicationContext(), "connection error", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 }
