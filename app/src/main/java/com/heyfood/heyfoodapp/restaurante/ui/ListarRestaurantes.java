@@ -27,6 +27,7 @@ import com.heyfood.heyfoodapp.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class ListarRestaurantes extends AppCompatActivity {
@@ -91,7 +92,10 @@ public class ListarRestaurantes extends AppCompatActivity {
                                 mensagem.append(restaurante.getEndereco().getCidade() + "\n\n");
                                 mensagem.append("Fone: " + restaurante.getContato().getTelefone() + "\n");
                                 mensagem.append("Email: " + restaurante.getContato().getEmail() + "\n");
-                                mensagem.append("Média: " + media.toString().replace(".",",") + "\n");
+                                String txtMedia = String.format(Locale.ENGLISH,"%.2f", media).replace(".", ",");
+                                if(txtMedia.equals("NaN"))
+                                    txtMedia = "-";
+                                mensagem.append("Média: " + txtMedia + "\n");
 
                                 mensagem.append(restaurante.getContato().getSite());
 
