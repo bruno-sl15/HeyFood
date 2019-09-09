@@ -89,7 +89,7 @@ public class Recomendacao {
         Collections.sort(avaliacao);
         List<Restaurante> restaurantes = new ArrayList<>();
         for(Avaliacao a: avaliacao){
-            if(a.nota >= 2.0f){
+            if(a.nota >= 1.9f){
                 restaurantes.add(a.getRestaurante());
             }
         }
